@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Outfit:wght@400;500;600&display=swap">
+<title>Mis turnos · ClinicaMed</title>
+<link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cabecera"></header>
+<main id="contenido" class="contenedor panel">
+<h1>Mis turnos</h1>
+<div class="filtros">
+  <button class="boton" type="button" data-pestana="proximos" aria-pressed="true">Próximos</button>
+  <button class="boton" type="button" data-pestana="pasados" aria-pressed="false">Pasados</button>
+  <a class="boton boton--primario" href="sacar-turno.html">Sacar turno nuevo</a>
+</div>
+<ul id="lista" class="panel__turnos"></ul>
+<p id="vacio" class="aviso aviso--info" hidden>No hay turnos en esta sección.</p>
+</main>
+<footer class="pie"><p>ClinicaMed · Proyecto académico · Todos los datos son ficticios</p></footer>
+<script type="module" src="../js/paginas/mis-turnos.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Outfit:wght@400;500;600&display=swap">
+<title>Cargar turno · ClinicaMed</title>
+<link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cabecera"></header>
+<main id="contenido" class="contenedor panel">
+<h1>Cargar turno a nombre de un paciente</h1>
+<form id="form-busqueda" class="filtros" novalidate>
+  <div class="campo"><label for="dni">DNI del paciente</label><input id="dni" inputmode="numeric" pattern="\d{7,8}" title="7 u 8 números, sin puntos" required></div>
+  <button class="boton boton--primario" type="submit">Buscar</button>
+</form>
+<p id="aviso" role="status" hidden></p>
+<p id="no-registrado" class="aviso aviso--info" hidden>Paciente no registrado. <a href="nuevo-paciente.html">Dar de alta</a></p>
+<section id="paso-turno" hidden>
+  <h2 id="paciente"></h2>
+  <div class="campo"><label for="especialidad">Especialidad</label><select id="especialidad"></select></div>
+  <div class="dos-columnas">
+    <div id="selector"></div>
+    <aside class="tarjeta"><h2>Resumen</h2><p id="resumen" class="texto-suave">Elegí un horario.</p>
+      <button id="confirmar" class="boton boton--primario" type="button" disabled>Confirmar turno</button></aside>
+  </div>
+</section>
+</main>
+<footer class="pie"><p>ClinicaMed · Proyecto académico · Todos los datos son ficticios</p></footer>
+<script type="module" src="../js/paginas/cargar-turno.js"></script>
+</body>
+</html>

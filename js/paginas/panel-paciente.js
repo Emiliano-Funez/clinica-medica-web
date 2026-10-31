@@ -6,11 +6,10 @@ import { $, el, formatearFecha, hoyISO } from '../utilidades/dom.js';
 iniciarCabecera();
 const usuario = await exigirRol('paciente');
 
-// Accesos de las próximas pantallas (05, 08 y 09). Se activan cuando existan.
 const ACCESOS = [
-  { titulo: 'Sacar turno', detalle: 'Elegí especialidad, profesional y horario.' },
-  { titulo: 'Mis turnos', detalle: 'Reprogramá o cancelá tus turnos.' },
-  { titulo: 'Historial clínico', detalle: 'Consultá tus visitas anteriores.' },
+  { titulo: 'Sacar turno', detalle: 'Elegí especialidad, profesional y horario.', ruta: 'sacar-turno.html' },
+  { titulo: 'Mis turnos', detalle: 'Reprogramá o cancelá tus turnos.', ruta: 'mis-turnos.html' },
+  { titulo: 'Historial clínico', detalle: 'Consultá tus visitas anteriores.', ruta: 'historial.html' },
 ];
 
 if (usuario) {
@@ -25,9 +24,9 @@ if (usuario) {
   $('#fecha-hoy').textContent = formatearFecha(hoyISO());
 
   ACCESOS.forEach((acceso) => {
-    const tarjeta = el('div', 'tarjeta tarjeta--deshabilitada');
-    tarjeta.setAttribute('aria-disabled', 'true');
-    tarjeta.append(el('h3', '', acceso.titulo), el('p', 'texto-suave', acceso.detalle), el('span', 'insignia insignia--atendido', 'Próximamente'));
+    const tarjeta = el('a', 'tarjeta tarjeta--enlace');
+    tarjeta.href = acceso.ruta;
+    tarjeta.append(el('h3', '', acceso.titulo), el('p', 'texto-suave', acceso.detalle));
     $('#accesos').append(tarjeta);
   });
 

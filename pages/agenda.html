@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Outfit:wght@400;500;600&display=swap">
+<title>Mi agenda · ClinicaMed</title>
+<link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cabecera"></header>
+<main id="contenido" class="contenedor panel">
+<h1>Mi agenda</h1>
+<p id="fecha-hoy" class="texto-suave"></p>
+<div class="resumen">
+  <p class="tarjeta"><strong id="total">0</strong> turnos</p>
+  <p class="tarjeta"><strong id="atendidos">0</strong> atendidos</p>
+  <p class="tarjeta"><strong id="pendientes">0</strong> pendientes</p>
+</div>
+<div class="tabla-envoltorio"><table id="tabla" class="tabla" hidden>
+  <thead><tr><th scope="col">Hora</th><th scope="col">Paciente</th><th scope="col">DNI</th><th scope="col">Estado</th><th scope="col">Acción</th></tr></thead>
+  <tbody id="cuerpo"></tbody>
+</table></div>
+<p id="vacio" class="aviso aviso--info" hidden>No tenés turnos para hoy.</p>
+</main>
+<footer class="pie"><p>ClinicaMed · Proyecto académico · Todos los datos son ficticios</p></footer>
+<script type="module" src="../js/paginas/agenda.js"></script>
+</body>
+</html>

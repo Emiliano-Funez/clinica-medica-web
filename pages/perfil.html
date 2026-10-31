@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Outfit:wght@400;500;600&display=swap">
+<title>Mi perfil · ClinicaMed</title>
+<link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cabecera"></header>
+<main id="contenido" class="contenedor panel">
+<h1>Mi perfil</h1>
+<p id="aviso" role="status" hidden></p>
+<div class="dos-columnas">
+  <aside class="tarjeta">
+    <p id="iniciales" class="avatar" aria-hidden="true"></p>
+    <h2 id="nombre-completo"></h2>
+    <p id="dni-lateral" class="texto-suave"></p>
+    <button id="abrir-clave" class="boton boton--secundario" type="button">Cambiar contraseña</button>
+    <button id="salir" class="boton boton--peligro" type="button">Cerrar sesión</button>
+  </aside>
+  <form id="form-perfil" class="tarjeta" novalidate>
+    <div class="campo"><label for="nombre">Nombre</label><input id="nombre" name="nombre" required></div>
+    <div class="campo"><label for="apellido">Apellido</label><input id="apellido" name="apellido" required></div>
+    <div class="campo"><label for="dni">DNI</label><input id="dni" name="dni" disabled></div>
+    <div class="campo"><label for="fechaNacimiento">Fecha de nacimiento</label><input id="fechaNacimiento" name="fechaNacimiento" type="date" required></div>
+    <div class="campo"><label for="email">Email</label><input id="email" name="email" disabled></div>
+    <div class="campo"><label for="telefono">Teléfono</label><input id="telefono" name="telefono" type="tel" required></div>
+    <button id="editar" class="boton boton--primario" type="button">Editar perfil</button>
+    <button id="guardar" class="boton boton--primario" type="submit" hidden>Guardar cambios</button>
+    <button id="cancelar" class="boton boton--secundario" type="button" hidden>Cancelar</button>
+  </form>
+</div>
+<dialog id="dialogo-clave" class="modal">
+  <form id="form-clave" novalidate>
+    <h2>Cambiar contraseña</h2>
+    <div class="campo"><label for="actual">Contraseña actual</label><input id="actual" name="actual" type="password" autocomplete="current-password" required></div>
+    <div class="campo"><label for="nueva">Contraseña nueva</label><input id="nueva" name="nueva" type="password" minlength="8" autocomplete="new-password" required></div>
+    <p id="aviso-clave" role="alert" hidden></p>
+    <div class="modal__acciones"><button class="boton boton--primario" type="submit">Guardar</button><button id="cerrar-clave" class="boton boton--secundario" type="button">Cancelar</button></div>
+  </form>
+</dialog>
+</main>
+<footer class="pie"><p>ClinicaMed · Proyecto académico · Todos los datos son ficticios</p></footer>
+<script type="module" src="../js/paginas/perfil.js"></script>
+</body>
+</html>

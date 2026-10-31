@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Outfit:wght@400;500;600&display=swap">
+<title>Atención del paciente · ClinicaMed</title>
+<link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cabecera"></header>
+<main id="contenido" class="contenedor panel">
+<p><a href="agenda.html">← Volver a mi agenda</a></p>
+<div class="dos-columnas">
+  <section>
+    <h1 id="paciente">Paciente</h1>
+    <p id="datos" class="texto-suave"></p>
+    <h2>Visitas anteriores</h2>
+    <ul id="previas" class="panel__turnos"></ul>
+    <p id="sin-previas" class="aviso aviso--info" hidden>Sin visitas anteriores.</p>
+  </section>
+  <section class="tarjeta">
+    <h2>Nueva entrada de historial</h2>
+    <p id="ya-atendido" class="aviso aviso--info" hidden>Este turno ya fue atendido.</p>
+    <form id="form-historial" novalidate>
+      <div class="campo"><label for="fecha">Fecha</label><input id="fecha" name="fecha" type="date" required></div>
+      <div class="campo"><label for="motivo">Motivo de consulta</label><textarea id="motivo" name="motivo" rows="3" required></textarea></div>
+      <div class="campo"><label for="resultado">Resultado</label><textarea id="resultado" name="resultado" rows="4" required></textarea></div>
+      <p id="aviso" role="alert" hidden></p>
+      <button class="boton boton--primario" type="submit">Guardar entrada</button>
+      <a class="boton boton--secundario" href="agenda.html">Cancelar</a>
+    </form>
+  </section>
+</div>
+</main>
+<footer class="pie"><p>ClinicaMed · Proyecto académico · Todos los datos son ficticios</p></footer>
+<script type="module" src="../js/paginas/atencion.js"></script>
+</body>
+</html>

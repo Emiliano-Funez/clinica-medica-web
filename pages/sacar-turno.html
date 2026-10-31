@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Outfit:wght@400;500;600&display=swap">
+<title>Sacar turno · ClinicaMed</title>
+<link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cabecera"></header>
+<main id="contenido" class="contenedor panel">
+<ol class="indicador" aria-label="Pasos">
+  <li id="ind-1" aria-current="step">1. Especialidad</li><li id="ind-2">2. Profesional y horario</li><li id="ind-3">3. Confirmado</li>
+</ol>
+<section id="paso-1">
+  <h1>Elegí una especialidad</h1>
+  <div id="especialidades" class="grilla"></div>
+  <p><button id="continuar" class="boton boton--primario" type="button" disabled>Continuar</button></p>
+</section>
+<section id="paso-2" hidden>
+  <h1>Profesional y horario</h1>
+  <div class="dos-columnas">
+    <div id="selector"></div>
+    <aside class="tarjeta">
+      <h2>Tu turno</h2>
+      <p id="resumen" class="texto-suave">Elegí un horario.</p>
+      <p id="aviso" role="alert" hidden></p>
+      <button id="confirmar" class="boton boton--primario" type="button" disabled>Confirmar turno</button>
+      <button id="volver" class="boton boton--secundario" type="button">Volver</button>
+    </aside>
+  </div>
+</section>
+<section id="paso-3" class="tarjeta" hidden>
+  <h1><span aria-hidden="true">✔ </span>Turno reservado</h1>
+  <p id="datos-turno"></p>
+  <a class="boton boton--primario" href="mis-turnos.html">Ver mis turnos</a>
+  <a class="boton boton--secundario" href="../index.html">Ir al inicio</a>
+</section>
+</main>
+<footer class="pie"><p>ClinicaMed · Proyecto académico · Todos los datos son ficticios</p></footer>
+<script type="module" src="../js/paginas/sacar-turno.js"></script>
+</body>
+</html>

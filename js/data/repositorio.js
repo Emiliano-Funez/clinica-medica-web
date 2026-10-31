@@ -6,7 +6,7 @@ import { crearSemilla } from './seed.js';
    Para conectar la base de datos: se implementa la API REST y se cambia CONFIG.adaptador a 'api'.
    Las páginas y servicios no se modifican. */
 
-const CLAVE = 'clinicamed.demo.v1';
+const CLAVE = 'clinicamed.demo.v2';
 
 const adaptadorLocal = {
   async _leer() {

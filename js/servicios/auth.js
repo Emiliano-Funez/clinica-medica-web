@@ -5,7 +5,7 @@ import { hashClave } from '../utilidades/seguridad.js';
 // SOLO DEMO: con backend, la sesión será una cookie httpOnly emitida por el servidor.
 const SESION = 'clinicamed.sesion';
 // Pantallas de inicio por rol. Se completa a medida que se desarrolla cada panel.
-export const RUTAS_POR_ROL = { paciente: 'pages/panel-paciente.html' };
+export const RUTAS_POR_ROL = { paciente: 'pages/panel-paciente.html', especialista: 'pages/agenda.html', recepcion: 'pages/turnos-dia.html' };
 
 export async function ingresar(email, clave) {
   const [usuario] = await repositorio.listar('usuarios', { email: email.trim().toLowerCase() });
@@ -43,4 +43,9 @@ export async function exigirRol(rol) {
 export function cerrarSesion() {
   sessionStorage.removeItem(SESION);
   location.href = `${RAIZ}index.html`;
+}
+
+export async function cambiarClave(usuario, actual, nueva) {
+  if (usuario.passwordHash !== (await hashClave(actual))) throw new Error('La contraseña actual no es correcta.');
+  await repositorio.actualizar('usuarios', usuario.id, { passwordHash: await hashClave(nueva) });
 }

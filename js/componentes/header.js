@@ -3,7 +3,18 @@ import { usuarioActual, cerrarSesion } from '../servicios/auth.js';
 import { el } from '../utilidades/dom.js';
 
 // Solo secciones ya desarrolladas. Cada pantalla nueva se agrega aquí.
-const SECCIONES = { paciente: [{ texto: 'Mi panel', ruta: 'pages/panel-paciente.html' }] };
+const SECCIONES = {
+  paciente: [
+    { texto: 'Mi panel', ruta: 'pages/panel-paciente.html' }, { texto: 'Sacar turno', ruta: 'pages/sacar-turno.html' },
+    { texto: 'Mis turnos', ruta: 'pages/mis-turnos.html' }, { texto: 'Historial', ruta: 'pages/historial.html' },
+    { texto: 'Mi perfil', ruta: 'pages/perfil.html' },
+  ],
+  especialista: [{ texto: 'Mi agenda', ruta: 'pages/agenda.html' }],
+  recepcion: [
+    { texto: 'Turnos del día', ruta: 'pages/turnos-dia.html' }, { texto: 'Cargar turno', ruta: 'pages/cargar-turno.html' },
+    { texto: 'Nuevo paciente', ruta: 'pages/nuevo-paciente.html' },
+  ],
+};
 
 function crearEnlace(texto, ruta, clase = 'enlace-nav') {
   const enlace = el('a', clase, texto);

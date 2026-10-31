@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Outfit:wght@400;500;600&display=swap">
+<title>Turnos del día · ClinicaMed</title>
+<link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cabecera"></header>
+<main id="contenido" class="contenedor panel">
+<h1>Turnos del día</h1>
+<div class="filtros">
+  <div class="campo"><label for="f-fecha">Fecha</label><input id="f-fecha" type="date"></div>
+  <div class="campo"><label for="f-especialista">Especialista</label><select id="f-especialista"><option value="">Todos</option></select></div>
+  <div class="campo"><label for="f-especialidad">Especialidad</label><select id="f-especialidad"><option value="">Todas</option></select></div>
+  <a class="boton boton--primario" href="cargar-turno.html">+ Cargar turno</a>
+  <a class="boton boton--secundario" href="nuevo-paciente.html">+ Nuevo paciente</a>
+</div>
+<div class="tabla-envoltorio"><table id="tabla" class="tabla" hidden>
+  <thead><tr><th scope="col">Hora</th><th scope="col">Paciente</th><th scope="col">Especialista</th><th scope="col">Especialidad</th><th scope="col">Estado</th><th scope="col">Acciones</th></tr></thead>
+  <tbody id="cuerpo"></tbody>
+</table></div>
+<p id="vacio" class="aviso aviso--info" hidden>No hay turnos con estos filtros.</p>
+</main>
+<footer class="pie"><p>ClinicaMed · Proyecto académico · Todos los datos son ficticios</p></footer>
+<script type="module" src="../js/paginas/turnos-dia.js"></script>
+</body>
+</html>
