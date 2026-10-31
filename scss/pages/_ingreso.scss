@@ -1,0 +1,10 @@
+@use '../utilities' as *;
+
+// Compartido por Iniciar sesión y Registro.
+.acceso {
+  display: grid;
+  @include desde($tablet) { grid-template-columns: 1fr 1fr; }
+  &__bienvenida { display: grid; align-content: center; padding: 2rem; background: $primario; color: #fff; h1 { color: #fff; } }
+  &__formulario { align-self: center; width: 100%; max-width: 34rem; margin-inline: auto; padding: 2rem; }
+  &__doble { display: grid; gap: 0 1rem; @include desde($tablet) { grid-template-columns: 1fr 1fr; } }
+}

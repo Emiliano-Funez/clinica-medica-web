@@ -1,0 +1,21 @@
+@use '../utilities' as *;
+
+.hero {
+  padding-block: 4rem; background: linear-gradient(135deg, $primario, $primario-oscuro); color: #fff;
+  h1 { color: #fff; }
+  p { max-width: 36rem; font-size: 1.15rem; }
+  &__acciones {
+    display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem;
+    .boton--primario { background: #fff; border-color: #fff; color: $primario-oscuro; }
+    .boton--secundario { background: transparent; border-color: #fff; color: #fff; }
+  }
+}
+.pasos {
+  display: grid; gap: 1rem; margin: 0; padding: 0; list-style: none; counter-reset: paso;
+  @include desde($tablet) { grid-template-columns: repeat(3, 1fr); }
+  li { counter-increment: paso; }
+  li::before {
+    content: counter(paso); display: grid; place-items: center; width: 2rem; height: 2rem; margin-bottom: .5rem;
+    border-radius: 50%; background: $primario; color: #fff; font-weight: 600;
+  }
+}

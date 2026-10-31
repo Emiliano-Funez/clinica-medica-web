@@ -1,0 +1,8 @@
+@use '../utilities' as *;
+
+.panel {
+  padding-block: 2rem;
+  &__accesos { display: grid; gap: 1rem; margin-block: 1.5rem; @include desde($tablet) { grid-template-columns: repeat(3, 1fr); } }
+  &__turnos { display: grid; gap: .75rem; margin: 0; padding: 0; list-style: none; }
+}
+.turno { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; }

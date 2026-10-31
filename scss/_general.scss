@@ -1,0 +1,14 @@
+@use 'utilities' as *;
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; background: $fondo; color: $texto; font: 1rem/1.6 $fuente-texto; }
+main { flex: 1; }
+h1, h2, h3 { font-family: $fuente-titulos; line-height: 1.2; margin: 0 0 .5em; color: $primario-oscuro; }
+h1 { font-size: clamp(2rem, 5vw, 3rem); }
+h2 { font-size: 1.6rem; }
+h3 { font-size: 1.15rem; }
+a { color: $primario; }
+:focus-visible { outline: 3px solid $primario; outline-offset: 2px; }
+.saltar { position: absolute; left: -999px; &:focus { left: 1rem; top: 1rem; z-index: 10; padding: .5rem 1rem; background: $superficie; } }
+.seccion { padding-block: 2.5rem; }
+.pie { padding: 1.5rem 1rem; text-align: center; color: $texto-suave; font-size: .9rem; p { margin: 0; } }

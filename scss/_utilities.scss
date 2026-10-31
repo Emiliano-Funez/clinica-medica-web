@@ -1,0 +1,13 @@
+// Variables, mixins y utilidades globales.
+$primario: #0f6e6e; $primario-oscuro: #0a4f50; $fondo: #faf5ea; $superficie: #fff;
+$texto: #1f2d2d; $texto-suave: #556666; $borde: #e3dccb; $error: #c53030;
+$estados: (pendiente: #8a5a12, confirmado: #2f855a, atendido: #2b6cb0, cancelado: #c53030);
+$fuente-titulos: 'Fraunces', Georgia, serif;
+$fuente-texto: 'Outfit', system-ui, sans-serif;
+$radio: 14px; $sombra: 0 2px 10px rgb(15 110 110 / 10%);
+$tablet: 48rem; $escritorio: 64rem;
+
+@mixin desde($ancho) { @media (min-width: $ancho) { @content; } }
+
+.contenedor { width: min(100% - 2rem, 70rem); margin-inline: auto; }
+.texto-suave { color: $texto-suave; margin-block: 0 .5rem; }

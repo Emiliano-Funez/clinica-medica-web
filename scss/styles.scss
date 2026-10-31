@@ -1,0 +1,8 @@
+// Punto de entrada: compila a styles/styles.css (npm run build).
+@use 'utilities';
+@use 'general';
+@use 'components/header';
+@use 'components/ui';
+@use 'pages/inicio';
+@use 'pages/ingreso';
+@use 'pages/panel-paciente';
