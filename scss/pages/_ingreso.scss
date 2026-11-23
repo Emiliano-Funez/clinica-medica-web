@@ -1,6 +1,7 @@
 @use '../utilities' as *;
 
 // Compartido por Iniciar sesión y Registro.
+
 .acceso {
   display: grid;
   @include desde($tablet) { grid-template-columns: 1fr 1fr; }

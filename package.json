@@ -7,5 +7,13 @@
     "sass": "sass --watch scss/styles.scss:styles/styles.css",
     "build": "sass --style=compressed scss/styles.scss styles/styles.css"
   },
-  "devDependencies": { "sass": "^1.80.0" }
+  "devDependencies": {
+    "sass": "^1.80.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
+    "mysql2": "^3.24.6"
+  }
 }
