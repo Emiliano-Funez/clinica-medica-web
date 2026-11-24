@@ -1,0 +1,25 @@
+@use '../utilities' as *;
+
+.ubicacion {
+  padding-block: clamp(2rem, 5vw, 4rem);
+  &__intro { max-width: 48rem; margin: 0 auto 2rem; text-align: center; }
+  &__intro p { margin: 0; color: $texto-suave; font-size: 1.1rem; }
+  &__etiqueta { display: inline-block; margin-bottom: .6rem; color: $primario; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-size: .78rem; }
+  &__contenido { display: grid; gap: 1.25rem; align-items: stretch; }
+  &__datos { display: flex; flex-direction: column; align-items: flex-start; }
+  &__icono { display: grid; width: 3rem; height: 3rem; margin-bottom: .85rem; place-items: center; border-radius: 50%; background: #e6f2f2; }
+  &__icono svg { width: 1.5rem; fill: $primario; }
+  &__datos h2 { margin-bottom: .35rem; }
+  &__direccion { margin: 0; color: $texto; font-size: 1.05rem; }
+  &__estado { margin: .75rem 0 1.25rem; color: $texto-suave; font-size: .92rem; }
+  &__boton { margin-top: auto; }
+  &__mapa-contenedor { position: relative; min-height: 22rem; padding: .5rem; overflow: hidden; }
+  &__mapa { width: 100%; min-height: 21rem; border-radius: calc($radio - 6px); background: #e7efec; }
+  &__mapa-error { position: absolute; inset: auto 1rem 1rem; padding: .8rem 1rem; border: 1px solid #e9b6b6; border-radius: 10px; background: #fff5f5; color: $error; }
+
+  @include desde($tablet) {
+    &__contenido { grid-template-columns: minmax(16rem, .75fr) minmax(0, 1.7fr); }
+    &__mapa-contenedor { min-height: 28rem; }
+    &__mapa { min-height: 27rem; }
+  }
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="clinicamed-api-url" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Outfit:wght@400;500;600&display=swap">
+<title>Dónde nos encontramos · ClinicaMed</title>
+<link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cabecera"></header>
+<main id="contenido" class="ubicacion contenedor">
+  <section class="ubicacion__intro" aria-labelledby="titulo-ubicacion">
+    <span class="ubicacion__etiqueta">Estamos para ayudarte</span>
+    <h1 id="titulo-ubicacion">Dónde nos encontramos</h1>
+    <p>Encontrá nuestra sede y prepará tu visita.</p>
+  </section>
+
+  <section class="ubicacion__contenido" aria-label="Ubicación de la clínica">
+    <article class="ubicacion__datos tarjeta">
+      <div class="ubicacion__icono" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false"><path d="M12 22s8-7.1 8-13a8 8 0 1 0-16 0c0 5.9 8 13 8 13Zm0-10.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/></svg>
+      </div>
+      <h2 id="sede-nombre">ClinicaMed</h2>
+      <p id="sede-direccion" class="ubicacion__direccion">Cargando dirección…</p>
+      <p id="sede-estado" class="ubicacion__estado" role="status" aria-live="polite">Conectando con la sede…</p>
+      <a id="enlace-maps" class="boton boton--primario ubicacion__boton" href="#" target="_blank" rel="noopener noreferrer" hidden>Abrir indicaciones en Google Maps</a>
+    </article>
+
+    <div class="ubicacion__mapa-contenedor tarjeta">
+      <div id="mapa" class="ubicacion__mapa" role="region" aria-label="Mapa de ubicación de ClinicaMed"></div>
+      <div id="mapa-error" class="ubicacion__mapa-error" role="alert" hidden></div>
+    </div>
+  </section>
+</main>
+<footer class="pie"><p>ClinicaMed · Proyecto académico · Todos los datos son ficticios</p></footer>
+<script type="module" src="../js/paginas/ubicacion.js"></script>
+</body>
+</html>

@@ -7,12 +7,14 @@ const SECCIONES = {
   paciente: [
     { texto: 'Mi panel', ruta: 'pages/panel-paciente.html' }, { texto: 'Sacar turno', ruta: 'pages/sacar-turno.html' },
     { texto: 'Mis turnos', ruta: 'pages/mis-turnos.html' }, { texto: 'Historial', ruta: 'pages/historial.html' },
-    { texto: 'Mi perfil', ruta: 'pages/perfil.html' },
+    { texto: 'Mi perfil', ruta: 'pages/perfil.html' }, { texto: 'Dónde nos encontramos', ruta: 'pages/ubicacion.html' },
   ],
-  especialista: [{ texto: 'Mi agenda', ruta: 'pages/agenda.html' }],
+  especialista: [
+    { texto: 'Mi agenda', ruta: 'pages/agenda.html' }, { texto: 'Dónde nos encontramos', ruta: 'pages/ubicacion.html' },
+  ],
   recepcion: [
     { texto: 'Turnos del día', ruta: 'pages/turnos-dia.html' }, { texto: 'Cargar turno', ruta: 'pages/cargar-turno.html' },
-    { texto: 'Nuevo paciente', ruta: 'pages/nuevo-paciente.html' },
+    { texto: 'Nuevo paciente', ruta: 'pages/nuevo-paciente.html' }, { texto: 'Dónde nos encontramos', ruta: 'pages/ubicacion.html' },
   ],
 };
 
@@ -34,7 +36,11 @@ export async function iniciarCabecera() {
     salir.addEventListener('click', cerrarSesion);
     nav.append(salir);
   } else {
-    nav.append(crearEnlace('Ingresar', 'pages/ingreso.html'), crearEnlace('Registrarme', 'pages/registro.html', 'boton boton--primario'));
+    nav.append(
+      crearEnlace('Dónde nos encontramos', 'pages/ubicacion.html'),
+      crearEnlace('Ingresar', 'pages/ingreso.html'),
+      crearEnlace('Registrarme', 'pages/registro.html', 'boton boton--primario'),
+    );
   }
   const interior = el('div', 'contenedor cabecera__interior');
   interior.append(crearEnlace('ClinicaMed', 'index.html', 'logo'), nav);
