@@ -9,12 +9,10 @@ const SECCIONES = {
     { texto: 'Mis turnos', ruta: 'pages/mis-turnos.html' }, { texto: 'Historial', ruta: 'pages/historial.html' },
     { texto: 'Mi perfil', ruta: 'pages/perfil.html' }, { texto: 'Dónde nos encontramos', ruta: 'pages/ubicacion.html' },
   ],
-  especialista: [
-    { texto: 'Mi agenda', ruta: 'pages/agenda.html' }, { texto: 'Dónde nos encontramos', ruta: 'pages/ubicacion.html' },
-  ],
+  especialista: [{ texto: 'Mi agenda', ruta: 'pages/agenda.html' }],
   recepcion: [
     { texto: 'Turnos del día', ruta: 'pages/turnos-dia.html' }, { texto: 'Cargar turno', ruta: 'pages/cargar-turno.html' },
-    { texto: 'Nuevo paciente', ruta: 'pages/nuevo-paciente.html' }, { texto: 'Dónde nos encontramos', ruta: 'pages/ubicacion.html' },
+    { texto: 'Nuevo paciente', ruta: 'pages/nuevo-paciente.html' },
   ],
 };
 
@@ -37,7 +35,6 @@ export async function iniciarCabecera() {
     nav.append(salir);
   } else {
     nav.append(
-      crearEnlace('Dónde nos encontramos', 'pages/ubicacion.html'),
       crearEnlace('Ingresar', 'pages/ingreso.html'),
       crearEnlace('Registrarme', 'pages/registro.html', 'boton boton--primario'),
     );
