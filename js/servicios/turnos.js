@@ -22,24 +22,39 @@ export function proximosDias(cantidad = 7) {
   return dias;
 }
 
-export async function horariosLibres(especialistaId, fecha) {
-  const ocupados = (await repositorio.listar('turnos', { especialistaId, fecha })).filter((t) => t.estado !== 'cancelado').map((t) => t.hora);
+export async function horariosLibres(especialistaId, fecha, { pacienteId, excluirTurnoId } = {}) {
+  const turnos = await repositorio.listar('turnos', { fecha });
+  const ocupados = turnos
+    .filter((t) => String(t.especialistaId) === String(especialistaId) && t.estado !== 'cancelado')
+    .map((t) => t.hora);
+  const horariosPaciente = pacienteId == null ? [] : turnos
+    .filter((t) => String(t.pacienteId) === String(pacienteId)
+      && String(t.id) !== String(excluirTurnoId)
+      && t.estado !== 'cancelado')
+    .map((t) => t.hora);
   const ahora = new Date().toLocaleTimeString('sv-SE').slice(0, 5);
   const esHoy = fecha === new Date().toLocaleDateString('sv-SE');
-  return franjas().filter((h) => !ocupados.includes(h) && !(esHoy && h <= ahora));
+  return franjas().filter((h) => !ocupados.includes(h) && !horariosPaciente.includes(h) && !(esHoy && h <= ahora));
 }
 
-async function validarLibre(especialistaId, fecha, hora) {
-  if (!(await horariosLibres(especialistaId, fecha)).includes(hora)) throw new Error('Ese horario ya no está disponible. Elegí otro.');
+async function validarLibre(especialistaId, fecha, hora, { pacienteId, excluirTurnoId } = {}) {
+  const turnos = await repositorio.listar('turnos', { fecha });
+  if (pacienteId != null && turnos.some((t) => String(t.pacienteId) === String(pacienteId)
+    && String(t.id) !== String(excluirTurnoId) && t.hora === hora && t.estado !== 'cancelado')) {
+    throw new Error('El paciente ya tiene otro turno ese día y a esa hora. Elegí otro horario.');
+  }
+  if (!(await horariosLibres(especialistaId, fecha, { pacienteId, excluirTurnoId })).includes(hora)) {
+    throw new Error('Ese horario ya no está disponible. Elegí otro.');
+  }
 }
 
 export async function crearTurno({ pacienteId, especialistaId, fecha, hora, estado }) {
-  await validarLibre(especialistaId, fecha, hora);
+  await validarLibre(especialistaId, fecha, hora, { pacienteId });
   return repositorio.crear('turnos', { pacienteId, especialistaId, fecha, hora, estado });
 }
 
 export async function cambiarHorario(turno, { fecha, hora }, estado) {
-  await validarLibre(turno.especialistaId, fecha, hora);
+  await validarLibre(turno.especialistaId, fecha, hora, { pacienteId: turno.pacienteId, excluirTurnoId: turno.id });
   return repositorio.actualizar('turnos', turno.id, { fecha, hora, estado });
 }
 

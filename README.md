@@ -1,61 +1,77 @@
 # ClinicaMed
 
-Frontend web y backend de ClinicaMed. Esta guía explica cómo preparar el proyecto en otra computadora para una presentación local.
+Aplicación web para gestionar pacientes, turnos, recepción, agenda de especialistas e historial clínico. El backend Express sirve también el frontend; no hace falta Live Server.
 
 ## Requisitos
 
-- Node.js instalado.
-- MySQL o MariaDB instalado y en ejecución.
-- Visual Studio Code con Live Server, o cualquier servidor estático para abrir el frontend por HTTP.
+- Node.js 18 o posterior.
+- MySQL 8 o compatible con InnoDB.
+- Git para clonar el repositorio.
 
-## Preparar el proyecto
+## Instalación local en Windows
 
-1. Cloná el repositorio o descargá el ZIP desde GitHub.
-2. Abrí la carpeta del proyecto en Visual Studio Code.
-3. En una terminal, instalá las dependencias del backend:
+1. Cloná el repositorio y entrá a la carpeta:
+
+   ```powershell
+   git clone https://github.com/Emiliano-Funez/clinica-medica-web.git
+   cd clinica-medica-web
+   ```
+
+2. Prepará la base de datos. Desde MySQL Workbench, abrí y ejecutá `backend/db/schema.sql`. El archivo crea `base_de_datos_clinica`, las tablas, los roles y las especialidades iniciales.
+
+3. Creá la configuración local y ajustá los datos de MySQL:
+
+   ```powershell
+   Copy-Item backend/.env.example backend/.env
+   ```
+
+   Abrí `backend/.env`. Poné el usuario y la contraseña de MySQL de esa computadora. Si `root` no tiene contraseña, dejá `DB_PASS=` vacío. Cambiá `JWT_SECRET` por una frase privada larga.
+
+4. Instalá e iniciá el backend:
 
    ```powershell
    cd backend
-   npm install
-   Copy-Item .env.example .env
+   npm ci
+   npm run seed
+   npm start
    ```
 
-4. Editá `backend/.env` con la configuración de esa computadora. Completá los datos de MySQL/MariaDB, la clave de Google Maps y, si vas a probar correos, las credenciales OAuth de Gmail. El archivo `.env` no se sube a GitHub.
+5. Abrí **http://localhost:3000**. El backend sirve allí la página y la API. Para detenerlo, volvé a la terminal y presioná `Ctrl+C`.
 
-## Base de datos
+## Cuentas de demostración
 
-La base de datos real no está incluida en GitHub. Para conservar sus datos, exportala desde la computadora original e importala en la nueva. También podés preparar una base nueva con:
+La semilla crea cuentas ficticias con la clave `Demo1234`:
 
-```powershell
-cd backend
-mysql -u root -p < db/schema.sql
-npm run seed
+| Perfil | Email |
+|---|---|
+| Recepción | `recepcion@clinicamed.com` |
+| Especialista (Dermatología) | `sofia.lopez@consultorio.com` |
+| Paciente | `martin@email.com` |
+
+Estas cuentas son solo para una base de práctica. `npm run seed` no modifica usuarios que ya tengan el mismo email o DNI.
+
+## Servicios externos
+
+El mapa requiere una clave propia de Google Maps JavaScript API en `GOOGLE_MAPS_API_KEY`. El envío real de correo Gmail y SMS requiere credenciales propias. Sin ellas, la aplicación y el flujo de turnos pueden ejecutarse, pero esos servicios externos no enviarán mensajes reales. WhatsApp todavía no está implementado.
+
+## Datos y seguridad
+
+- La base real no se incluye en GitHub. Cada instalación crea su base local con `backend/db/schema.sql`.
+- `backend/.env` contiene secretos y está excluido del repositorio. No lo compartas ni lo reemplaces con el `.env.example` ya completado.
+- Para actualizar una base anterior, consultá [la guía del backend](backend/GUIA_ENTREGA.md) y aplicá solo las migraciones que correspondan.
+- No ejecutes `npm run seed` en una base con información real; carga pacientes, profesionales y recepción de demostración.
+
+## Estructura
+
+```text
+clinicamed-web/
+├── index.html
+├── js/                 # lógica de las vistas y acceso a la API
+├── pages/              # pantallas de la aplicación
+├── scss/ y styles/     # estilos fuente y CSS compilado
+└── backend/
+    ├── server.js
+    ├── db/             # esquema y migraciones SQL
+    ├── services/       # notificaciones y servicios externos
+    └── tests/          # pruebas del backend
 ```
-
-`npm run seed` carga usuarios de demostración. Si la base ya existía antes de agregar notificaciones, aplicá `db/migracion_notificaciones.sql` una sola vez.
-
-## Iniciar el backend
-
-Desde la carpeta `backend`, ejecutá:
-
-```powershell
-npm start
-```
-
-El servidor usa el puerto indicado por `PORT` en `.env` (por defecto, `3000`). La ruta `http://localhost:3000/api/sede` devuelve los datos que usa la página “Dónde nos encontramos”.
-
-## Abrir el frontend
-
-En Visual Studio Code, abrí `index.html` con Live Server. No abras el archivo directamente con `file://`. Para la configuración local predeterminada, el frontend se sirve en `http://localhost:5500` y se conecta al backend en `http://localhost:3000`.
-
-El frontend está configurado inicialmente con el adaptador local de demostración (`adaptador: 'local'` en `js/config.js`). El backend tiene sus propias rutas de API; iniciar el backend no cambia por sí solo el adaptador del frontend.
-
-## Google Maps y Gmail
-
-- Maps requiere una clave válida con **Maps JavaScript API** habilitada. Completá `GOOGLE_MAPS_API_KEY`, `SEDE_DIRECCION`, `SEDE_LAT` y `SEDE_LNG`. En Google Cloud, restringí la clave por dominio.
-- Gmail requiere credenciales OAuth válidas en las variables `GMAIL_*` del `.env`. Las credenciales son privadas y no deben subirse a GitHub.
-- Si frontend y backend se alojan en dominios distintos, agregá el origen del frontend a `FRONTEND_ORIGINS` en `.env`.
-
-## Archivos privados
-
-`backend/.env` contiene contraseñas y claves privadas. Git lo ignora. Compartí esos valores por un medio seguro; no los pegues en el README ni los publiques en GitHub.

@@ -16,7 +16,7 @@ export function reprogramar(turno, estadoNuevo) {
     ok.disabled = true;
     let eleccion = {};
     const cerrar = (valor) => { dialogo.close(); dialogo.remove(); resolver(valor); };
-    montarSelector(contenedor, { especialistaId: turno.especialistaId, alCambiar: (s) => { eleccion = s; ok.disabled = !s.hora; } });
+    montarSelector(contenedor, { especialistaId: turno.especialistaId, pacienteId: turno.pacienteId, excluirTurnoId: turno.id, alCambiar: (s) => { eleccion = s; ok.disabled = !s.hora; } });
     ok.addEventListener('click', async () => {
       try { await cambiarHorario(turno, eleccion, estadoNuevo); cerrar(true); } catch (error) { mostrarAviso(aviso, error.message); }
     });

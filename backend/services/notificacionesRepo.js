@@ -2,13 +2,13 @@
 function crearRepoMysql(db) {
   return {
     async turnoCompleto(id) {
-      const [r] = await db.query(`SELECT t.id_turno id,t.fecha,LEFT(t.horario,5) hora,t.estado,
+      const [r] = await db.query(`SELECT t.id_turno id,t.fecha,LEFT(t.horario,5) hora,LOWER(t.estado) estado,
           pp.id_persona pid,pp.nombre pnom,pp.apellido pape,pp.email,pp.num_celular tel,
           pe.nombre mnom,pe.apellido mape,es.nombre esp
         FROM turno t
-        JOIN persona_rol prp ON prp.id_persona_rol=t.id_paciente JOIN persona pp ON pp.id_persona=prp.id_persona
-        JOIN persona_rol pre ON pre.id_persona_rol=t.id_especialista JOIN persona pe ON pe.id_persona=pre.id_persona
-        LEFT JOIN especialista e ON e.id_persona_rol=t.id_especialista LEFT JOIN especialidad es ON es.id_especialidad=e.id_especialidad
+        JOIN persona_rol prp ON prp.id_persona_rol=t.id_persona_rol_paciente JOIN persona pp ON pp.id_persona=prp.id_persona
+        JOIN persona_rol pre ON pre.id_persona_rol=t.id_persona_rol_especialista JOIN persona pe ON pe.id_persona=pre.id_persona
+        LEFT JOIN persona_especialidad e ON e.id_persona_rol=t.id_persona_rol_especialista LEFT JOIN especialidad es ON es.id_especialidad=e.id_especialidad
         WHERE t.id_turno=?`, [id]);
       const x = r[0];
       return x && { id: x.id, fecha: x.fecha, hora: x.hora, estado: x.estado, medico: `${x.mnom} ${x.mape}`.trim(), especialidad: x.esp || null,
@@ -30,7 +30,7 @@ function crearRepoMysql(db) {
       await db.query('UPDATE notificacion SET estado=?,error=?,proveedor_id=?,intentos=? WHERE id_notificacion=?', [estado, error && String(error).slice(0, 300), proveedor, intentos, id]);
     },
     async turnosEntre(desde, hasta) {
-      const [r] = await db.query("SELECT id_turno id FROM turno WHERE estado='confirmado' AND TIMESTAMP(fecha,horario)>? AND TIMESTAMP(fecha,horario)<=?", [desde, hasta]);
+      const [r] = await db.query("SELECT id_turno id FROM turno WHERE UPPER(estado)='CONFIRMADO' AND TIMESTAMP(fecha,horario)>? AND TIMESTAMP(fecha,horario)<=?", [desde, hasta]);
       return r;
     },
     async pendientesDeReintento(max) {

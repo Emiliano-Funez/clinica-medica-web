@@ -14,10 +14,13 @@
 <main id="contenido" class="contenedor panel">
 <h1>Historial clínico</h1>
 <p class="texto-suave">Solo lectura. Las entradas las carga tu especialista.</p>
+<div class="filtros">
+  <div class="campo"><label for="f-especialidad">Filtrar por especialidad</label><select id="f-especialidad"><option value="">Todas las especialidades</option></select></div>
+</div>
 <ul id="lista" class="panel__turnos"></ul>
-<p id="vacio" class="aviso aviso--info" hidden>Todavía no tenés visitas registradas.</p>
+<p id="vacio" class="aviso aviso--info" hidden></p>
 </main>
-<footer class="pie"><p>ClinicaMed · Proyecto académico · Todos los datos son ficticios</p></footer>
+<footer class="pie"><p>ClinicaMed · Proyecto académico</p></footer>
 <script type="module" src="../js/paginas/historial.js"></script>
 </body>
 </html>

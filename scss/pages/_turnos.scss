@@ -11,5 +11,9 @@
 .filtros { display: flex; flex-wrap: wrap; align-items: end; gap: .75rem 1rem; margin-bottom: 1.5rem; .campo { margin-bottom: 0; } }
 .turno__acciones { display: flex; flex-wrap: wrap; gap: .5rem; }
 .resumen { display: grid; gap: 1rem; margin-bottom: 1.5rem; @include desde($tablet) { grid-template-columns: repeat(3, 1fr); }
-  p { margin: 0; } strong { font-size: 1.6rem; color: $primario; } }
+  p { margin: 0; } strong { font-size: 1.6rem; color: $primario; }
+  &__filtro { width: 100%; color: inherit; text-align: left; font: inherit; cursor: pointer; transition: border-color .15s, box-shadow .15s;
+    &:hover, &[aria-pressed="true"] { border-color: $primario; box-shadow: 0 0 0 2px rgb(15 110 110 / 18%); }
+  }
+}
 .avatar { display: grid; place-items: center; width: 4rem; height: 4rem; margin: 0 0 .5rem; border-radius: 50%; background: $primario; color: #fff; font: 600 1.4rem $fuente-titulos; }

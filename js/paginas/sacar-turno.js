@@ -36,6 +36,7 @@ async function iniciar(usuario) {
 
   const cargarSelector = () => montarSelector($('#selector'), {
     especialidadId,
+    pacienteId: paciente.id,
     alCambiar: (s) => {
       eleccion = s;
       const doc = ctx.especialistas.find((d) => d.id === s.especialistaId);

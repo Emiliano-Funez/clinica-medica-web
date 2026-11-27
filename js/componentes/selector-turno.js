@@ -3,8 +3,8 @@ import { horariosLibres, proximosDias } from '../servicios/turnos.js';
 import { el, formatearFecha } from '../utilidades/dom.js';
 
 // Elige fecha, profesional y horario libre. Se usa al sacar turno, cargar turno y reprogramar.
-export async function montarSelector(raiz, { especialidadId, especialistaId, alCambiar }) {
-  const profesionales = (await repositorio.listar('especialistas')).filter((d) => (especialistaId ? d.id === especialistaId : d.especialidadId === especialidadId));
+export async function montarSelector(raiz, { especialidadId, especialistaId, pacienteId, excluirTurnoId, alCambiar }) {
+  const profesionales = (await repositorio.listar('especialistas')).filter((d) => (especialistaId ? String(d.id) === String(especialistaId) : String(d.especialidadId) === String(especialidadId)));
   const seleccion = { fecha: null, especialistaId: especialistaId ?? null, hora: null };
   const fechas = el('div', 'selector__fechas');
   const lista = el('div', 'selector__lista');
@@ -14,7 +14,7 @@ export async function montarSelector(raiz, { especialidadId, especialistaId, alC
   async function pintarProfesionales() {
     lista.replaceChildren();
     for (const doc of profesionales) {
-      const libres = await horariosLibres(doc.id, seleccion.fecha);
+      const libres = await horariosLibres(doc.id, seleccion.fecha, { pacienteId, excluirTurnoId });
       const tarjeta = el('div', 'tarjeta');
       tarjeta.append(el('h3', '', `Dr/a. ${doc.nombre} ${doc.apellido}`));
       if (!libres.length) tarjeta.append(el('p', 'texto-suave', 'Sin horarios libres este día. Probá otra fecha o profesional.'));

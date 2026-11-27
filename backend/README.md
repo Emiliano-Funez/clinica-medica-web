@@ -1,36 +1,41 @@
-# ClinicaMed (Node + Express + MariaDB)
+# ClinicaMed: API y base de datos
 
-Probado con MariaDB 10.11 y Node 22.
+El servidor Express sirve el frontend y la API en el mismo origen: `http://localhost:3000`. La instalación completa desde cero está explicada en el [README principal](../README.md).
 
-1. Instalar dependencias: `npm install`
-2. Crear la base: `mariadb -u root -p < db/schema.sql`
-   (en Windows/XAMPP: `mysql -u root < db/schema.sql`, el cliente de MariaDB también se llama así)
-3. Copiar `.env.example` a `.env` y completar DB_USER / DB_PASS y JWT_SECRET.
-   Si querés un usuario propio en MariaDB:
-   `CREATE USER 'clinica'@'localhost' IDENTIFIED BY 'tu_clave'; GRANT ALL ON clinicamed.* TO 'clinica'@'localhost';`
-4. Cargar usuarios de demo: `npm run seed` (contraseña 1234)
-5. Iniciar: `npm start` y abrir http://localhost:3000
+## Instalación rápida
 
-Demo: martin@email.com (paciente) · laura@clinicamed.com (especialista) · recepcion@clinicamed.com (recepción)
+1. En MySQL Workbench, ejecutá `db/schema.sql` para crear `base_de_datos_clinica`, sus tablas, roles, especialidades y restricciones.
+2. Copiá `.env.example` como `.env` y completá los valores de conexión a MySQL y `JWT_SECRET`.
+3. Desde esta carpeta ejecutá:
 
-Estructura: `server.js` (API) · `seed.js` (datos demo) · `db/schema.sql` (tablas del MER) · `public/index.html` (web).
+   ```powershell
+   npm ci
+   npm run seed
+   npm start
+   ```
 
-## Google Maps (pantalla "Cómo llegar")
+4. Abrí `http://localhost:3000`.
 
-1. En Google Cloud Console creá una API key y habilitá **Maps JavaScript API**.
-2. Restringí la key por **HTTP referrers** (ej. `http://localhost:3000/*` y tu dominio final).
-3. En `.env` completá `GOOGLE_MAPS_API_KEY`, `SEDE_NOMBRE`, `SEDE_DIRECCION`, `SEDE_LAT` y `SEDE_LNG`.
-4. Reiniciá el servidor. La pantalla está en el menú del paciente y en la página pública.
+## Cuentas locales de demostración
 
-Sin key, la pantalla igual muestra la dirección y los botones "Cómo llegar" / "Abrir en Google Maps".
+`npm run seed` agrega cuentas ficticias que no existan (clave `Demo1234`). Entre ellas:
 
-## Notificaciones (correo y SMS)
+- Recepción: `recepcion@clinicamed.com`
+- Especialista, Dermatología: `sofia.lopez@consultorio.com`
+- Paciente: `martin@email.com`
 
-Cada vez que se registra, confirma, reprograma o cancela un turno, el paciente recibe un aviso. Además hay recordatorios 24 h y 2 h antes.
-Detalle completo, variables, pruebas y pendientes: **`docs/NOTIFICACIONES.md`**.
+No ejecutar la semilla sobre una base con datos reales.
 
-Resumen rápido:
-1. Si ya tenías la base cargada, corré `db/migracion_notificaciones.sql` (crea la tabla `notificacion`). Si es una instalación nueva, `db/schema.sql` ya la incluye.
-2. `npm install` y completá en `.env` las variables `GMAIL_*` y `SMS_MASIVOS_*` (ver `.env.example`).
-3. `npm test` corre las pruebas. `npm start` inicia el servidor y muestra qué canales quedaron activos.
+## Base existente
 
+Antes de aplicar cambios, hacer una copia de seguridad. `db/migracion_notificaciones.sql` crea la tabla de notificaciones y agrega `persona.fecha_nacimiento` si falta. `db/migracion_turno_paciente_unico.sql` agrega una restricción para que cada paciente tenga como máximo un turno activo en la misma fecha y hora. Si detecta conflictos existentes, los muestra y no agrega el índice hasta que se resuelvan.
+
+Para una base nueva, `db/schema.sql` ya incorpora ambas estructuras y restricciones.
+
+## Servicios externos
+
+- Google Maps requiere una clave propia en `GOOGLE_MAPS_API_KEY`.
+- Gmail y SMS requieren credenciales de proveedor propias; sin ellas no se envían mensajes reales. SMS queda en modo de prueba con `SMS_MASIVOS_TEST=1`.
+- WhatsApp está reservado y todavía no está implementado.
+
+Ver [docs/NOTIFICACIONES.md](docs/NOTIFICACIONES.md) para configuración y flujo de avisos.

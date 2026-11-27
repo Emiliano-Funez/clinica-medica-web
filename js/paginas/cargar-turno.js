@@ -19,6 +19,7 @@ async function iniciar() {
   const actualizarConfirmar = () => { $('#confirmar').disabled = !(paciente && eleccion.hora); };
   const cargarSelector = () => montarSelector($('#selector'), {
     especialidadId: $('#especialidad').value,
+    pacienteId: paciente?.id,
     alCambiar: (s) => {
       eleccion = s;
       const doc = ctx.especialistas.find((d) => d.id === s.especialistaId);
